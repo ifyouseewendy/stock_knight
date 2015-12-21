@@ -1,39 +1,111 @@
 # StockFighter
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/stock_fighter`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ruby API client for [StockFighter](www.stockfighter.io).
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'stock_fighter'
+```sh
+$ gem install stock_fighter
 ```
 
-And then execute:
+## API
 
-    $ bundle
+Initialization
 
-Or install it yourself as:
+```ruby
+venue   = StockFighter::Venue.new(ENV['venue'])
+account = StockFighter::Account.new(venue, ENV['account'], ENV['apikey'])
+stock   = StockFighter::Stock.new(venue, ENV['stock'])
+```
 
-    $ gem install stock_fighter
+### Venue
 
-## Usage
+Check A Venue Is Up
 
-TODO: Write usage instructions here
+> https://starfighter.readme.io/docs/venue-healthchecke
 
-## Development
+```ruby
+venue.status
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Stocks on a Venue
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+> https://starfighter.readme.io/docs/list-stocks-on-venue
 
-## Contributing
+```ruby
+venue.stocks
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/stock_fighter. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+### Account
 
+Status For All Orders
+
+> https://starfighter.readme.io/docs/status-for-all-orders
+
+```ruby
+account.orders
+```
+
+Status For All Orders In A Stock
+
+> https://starfighter.readme.io/docs/status-for-all-orders-in-a-stock
+
+```ruby
+account.orders_of(stock)
+```
+
+Status For An Existing Order
+
+> https://starfighter.readme.io/docs/status-for-an-existing-order
+
+```ruby
+stock.query stock, order: '123'
+```
+
+A New Order For A Stock
+
+> https://starfighter.readme.io/docs/place-new-order
+
+```ruby
+account.buy  stock, price: 100, qty: 10, type: :limit
+account.buy  stock, price: 200, qty: 10, type: :market
+account.sell stock, price: 300, qty: 10, type: :fill_or_kill
+account.sell stock, price: 400, qty: 10, type: :immediate_or_cancel
+```
+
+Cancel An Order
+
+> https://starfighter.readme.io/docs/cancel-an-order
+
+```ruby
+account.cancel stock, order: '123'
+```
+
+### Stock
+
+The Orderbook For A Stock
+
+> https://starfighter.readme.io/docs/get-orderbook-for-stock
+
+```ruby
+stock.orderbook
+```
+
+A Quote For A Stock
+
+> https://starfighter.readme.io/docs/a-quote-for-a-stock
+
+```ruby
+stock.quote
+```
+
+### API status
+
+> https://starfighter.readme.io/docs/heartbeat
+
+```ruby
+StockFighter::API.status
+```
 
 ## License
 
