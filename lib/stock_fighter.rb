@@ -1,3 +1,7 @@
+require 'httparty'
+require 'active_support/core_ext/hash/indifferent_access'
+require 'json'
+
 require "stock_fighter/version"
 require "stock_fighter/client"
 
