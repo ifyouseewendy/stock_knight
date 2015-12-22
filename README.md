@@ -13,19 +13,20 @@ $ gem install stock_fighter
 Initialization
 
 ```ruby
-venue   = StockFighter::Venue.new(ENV['venue'])
-account = StockFighter::Account.new(venue, ENV['account'], ENV['apikey'])
-stock   = StockFighter::Stock.new(venue, ENV['stock'])
+client = StockFighter::Client.new do |config|
+  config.apikey   = ENV['apikey']
+  config.account  = ENV['account']
+  config.venue    = ENV['venue']
+end
+stock = 'FOOBAR'
 ```
-
-### Venue
 
 Check A Venue Is Up
 
 > https://starfighter.readme.io/docs/venue-healthchecke
 
 ```ruby
-venue.status
+client.check_venue_status
 ```
 
 Stocks on a Venue
@@ -33,17 +34,15 @@ Stocks on a Venue
 > https://starfighter.readme.io/docs/list-stocks-on-venue
 
 ```ruby
-venue.stocks
+client.stocks
 ```
-
-### Account
 
 Status For All Orders
 
 > https://starfighter.readme.io/docs/status-for-all-orders
 
 ```ruby
-account.orders
+client.orders
 ```
 
 Status For All Orders In A Stock
@@ -51,7 +50,7 @@ Status For All Orders In A Stock
 > https://starfighter.readme.io/docs/status-for-all-orders-in-a-stock
 
 ```ruby
-account.orders_of(stock)
+client.orders_of(stock)
 ```
 
 Status For An Existing Order
@@ -59,7 +58,7 @@ Status For An Existing Order
 > https://starfighter.readme.io/docs/status-for-an-existing-order
 
 ```ruby
-account.query stock, order: '123'
+client.query stock, order: '123'
 ```
 
 A New Order For A Stock
@@ -67,10 +66,10 @@ A New Order For A Stock
 > https://starfighter.readme.io/docs/place-new-order
 
 ```ruby
-account.buy  stock, price: 100, qty: 10, type: :limit
-account.buy  stock, price: 200, qty: 10, type: :market
-account.sell stock, price: 300, qty: 10, type: :fill_or_kill
-account.sell stock, price: 400, qty: 10, type: :immediate_or_cancel
+client.buy  stock, price: 100, qty: 10, type: :limit
+client.buy  stock, price: 200, qty: 10, type: :market
+client.sell stock, price: 300, qty: 10, type: :fill_or_kill
+client.sell stock, price: 400, qty: 10, type: :immediate_or_cancel
 ```
 
 Cancel An Order
@@ -78,7 +77,7 @@ Cancel An Order
 > https://starfighter.readme.io/docs/cancel-an-order
 
 ```ruby
-account.cancel stock, order: '123'
+client.cancel stock, order: '123'
 ```
 
 ### Stock
@@ -88,7 +87,7 @@ The Orderbook For A Stock
 > https://starfighter.readme.io/docs/get-orderbook-for-stock
 
 ```ruby
-stock.orderbook
+client.orderbook_of('FOOBAR')
 ```
 
 A Quote For A Stock
@@ -96,7 +95,7 @@ A Quote For A Stock
 > https://starfighter.readme.io/docs/a-quote-for-a-stock
 
 ```ruby
-stock.quote
+client.quote_of(stock)
 ```
 
 ### API status
@@ -104,7 +103,7 @@ stock.quote
 > https://starfighter.readme.io/docs/heartbeat
 
 ```ruby
-StockFighter::API.status
+account.check_api_status
 ```
 
 ## License
