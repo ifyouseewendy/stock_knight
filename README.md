@@ -14,9 +14,9 @@ Initialization
 
 ```ruby
 client = StockFighter::Client.new do |config|
-  config.apikey   = ENV['apikey']
-  config.account  = ENV['account']
-  config.venue    = ENV['venue']
+  config.apikey   = ENV['APIKEY']
+  config.account  = ENV['ACCOUNT']
+  config.venue    = ENV['VENUE']
 end
 stock = 'FOOBAR'
 ```

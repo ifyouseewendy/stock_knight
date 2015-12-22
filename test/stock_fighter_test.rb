@@ -9,7 +9,7 @@ class StockFighterTest < Minitest::Test
 
   def setup
     @client = StockFighter::Client.new do |config|
-      config.apikey   = ENV['apikey']
+      config.apikey   = ENV['APIKEY']
       config.account  = ACCOUNT
       config.venue    = VENUE
     end
@@ -18,6 +18,16 @@ class StockFighterTest < Minitest::Test
 
   def test_that_it_has_a_version_number
     refute_nil ::StockFighter::VERSION
+  end
+
+  def test_config_setting
+    assert_raises ArgumentError, "apikey should not be blank" do
+      StockFighter::Client.new do |config|
+        config.apikey   = nil
+        config.account  = ACCOUNT
+        config.venue    = STOCK
+      end
+    end
   end
 
   def test_api_status
