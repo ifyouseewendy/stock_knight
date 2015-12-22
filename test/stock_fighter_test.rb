@@ -96,16 +96,18 @@ class StockFighterTest < Minitest::Test
     assert resp.has_key?(:ok)
 
     if resp[:ok]
-      unless (order=resp[:orders][0]).nil?
-        assert_equal  stock, order[:symbol]
-        assert        order.has_key?(:open)
-      end
+      assert_equal  stock, resp[:symbol]
+      assert        resp.has_key?(:open)
     else
       assert resp.has_key?(:error)
     end
   end
 
   def test_a_new_order_for_a_stock
+    assert_raises ArgumentError, "type is not valid" do
+      client.buy stock, price: 100, qty: 10, type: :custom_type
+    end
+
     resp = client.buy stock, price: 100, qty: 10, type: :limit
     assert resp.has_key?(:ok)
 
@@ -161,7 +163,7 @@ class StockFighterTest < Minitest::Test
     assert resp.has_key?(:ok)
 
     if resp[:ok]
-      assert resp.has_key?(:bid) && resp.has_key?(:ask)
+      assert resp.has_key?(:bidSize) && resp.has_key?(:askSize)
     else
       assert resp.has_key?(:error)
     end

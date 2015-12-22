@@ -32,6 +32,56 @@ module StockFighter
       self.class.get('/heartbeat', headers)
     end
 
+    def check_venue_status
+      self.class.get("/venues/#{config.venue}/heartbeat", headers)
+    end
+
+    def stocks
+      self.class.get("/venues/#{config.venue}/stocks", headers)
+    end
+
+    def orders
+      self.class.get("/venues/#{config.venue}/accounts/#{config.account}/orders", headers)
+    end
+
+    def orders_of(stock)
+      self.class.get("/venues/#{config.venue}/accounts/#{config.account}/stocks/#{stock}/orders", headers)
+    end
+
+    def query(stock, order:)
+      self.class.get("/venues/#{config.venue}/stocks/#{stock}/orders/#{order}", headers)
+    end
+
+    %i(buy sell).each do |opt|
+      define_method opt do |stock, price:, qty:, type:|
+        raise ArgumentError, "#{type} is not valid" unless TYPES.include?(type)
+
+        order = {
+          direction: opt,
+          price: price,
+          qty: qty,
+          orderType: type.to_s.gsub('_', '-')
+        }
+
+        self.class.post(
+          "/venues/#{config.venue}/stocks/#{stock}/orders",
+          headers.merge({body: JSON.dump(order)})
+        )
+      end
+    end
+
+    def cancel(stock, order:)
+      self.class.delete("/venues/#{config.venue}/stocks/#{stock}/orders/#{order}", headers)
+    end
+
+    def orderbook_of(stock)
+      self.class.get("/venues/#{config.venue}/stocks/#{stock}", headers)
+    end
+
+    def quote_of(stock)
+      self.class.get("/venues/#{config.venue}/stocks/#{stock}/quote", headers)
+    end
+
     private
 
       def headers
