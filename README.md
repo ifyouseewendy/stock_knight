@@ -59,7 +59,7 @@ Status For An Existing Order
 > https://starfighter.readme.io/docs/status-for-an-existing-order
 
 ```ruby
-stock.query stock, order: '123'
+account.query stock, order: '123'
 ```
 
 A New Order For A Stock
