@@ -10,5 +10,3 @@ gem 'minitest'
 gem 'pry-byebug'
 gem 'dotenv'
 gem 'minitest-focus'
-
-gem 'httparty'
