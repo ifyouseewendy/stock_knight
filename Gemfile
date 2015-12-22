@@ -6,5 +6,9 @@ gemspec
 gem 'bundler', '~> 1.10'
 gem 'rake', '~> 10.0'
 gem 'minitest'
+
 gem 'pry-byebug'
-gem 'codeclimate-test-reporter'
+gem 'dotenv'
+gem 'minitest-focus'
+
+gem 'httparty'
