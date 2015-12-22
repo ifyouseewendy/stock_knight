@@ -25,5 +25,9 @@ module StockFighter
       @config.validate!
     end
 
+    def check_api_status
+      self.class.get('/heartbeat')
+    end
+
   end
 end
