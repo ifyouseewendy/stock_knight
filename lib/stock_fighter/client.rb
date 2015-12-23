@@ -59,6 +59,9 @@ module StockFighter
         raise ArgumentError, "#{type} is not valid" unless TYPES.include?(type)
 
         order = {
+          account: config.account,
+          venue: config.venue,
+          stock: stock,
           direction: opt,
           price: price,
           qty: qty,
