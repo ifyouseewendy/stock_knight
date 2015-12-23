@@ -13,7 +13,7 @@ module StockFighter
 
     parser Parser::Simple
 
-    CONFIG = Struct.new(:apikey, :account, :venue) do
+    CONFIG = Struct.new(:apikey, :account, :venue, :debug_output) do
       def validate!
         key = %i(apikey account venue).detect{|k| self.public_send(k).nil? }
         raise ArgumentError, "#{key} should not be blank" unless key.nil?
@@ -26,6 +26,8 @@ module StockFighter
       yield (@config=CONFIG.new)
 
       config.validate!
+
+      self.class.class_eval { debug_output STDOUT } if config.debug_output
     end
 
     def check_api_status
