@@ -7,7 +7,7 @@ module StockFighter
 
     class Parser::Simple < HTTParty::Parser
       def parse
-        JSON.parse(body).with_indifferent_access
+        JSON.parse(body).with_indifferent_access rescue {error: body}
       end
     end
 
