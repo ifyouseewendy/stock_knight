@@ -8,5 +8,7 @@ gem 'rake', '~> 10.0'
 gem 'minitest'
 
 gem 'pry-byebug'
+gem 'pry-rescue'
+gem 'pry-stack_explorer'
 gem 'dotenv'
 gem 'minitest-focus'
