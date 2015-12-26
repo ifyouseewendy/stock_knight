@@ -1,11 +1,11 @@
-# StockFighter
+# StockKnight
 
-Ruby API client for [StockFighter](www.stockfighter.io).
+An API client strikes against [StockFighter](www.stockfighter.io).
 
 ## Installation
 
 ```sh
-$ gem install stock_fighter
+$ gem install stock_knight
 ```
 
 ## API
@@ -13,7 +13,7 @@ $ gem install stock_fighter
 Initialization
 
 ```ruby
-client = StockFighter::Client.new(ENV['APIKEY'])
+client = StockKnight::Client.new(ENV['APIKEY'])
 
 client.configure do |config|
   config.account      = ENV['ACCOUNT']
@@ -114,7 +114,7 @@ account.check_api_status
 > https://discuss.starfighters.io/t/the-gm-api-how-to-start-stop-restart-resume-trading-levels-automagically/143
 
 ```ruby
-gm = StockFighter::GameMaster.new(ENV['APIKEY'])
+gm = StockKnight::GameMaster.new(ENV['APIKEY'])
 
 gm.start(:firts_steps)
 gm.stop(instance_id)

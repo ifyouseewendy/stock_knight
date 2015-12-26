@@ -1,8 +1,8 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'stock_fighter'
+require 'stock_knight'
 
-client = StockFighter::Client.new(ENV['APIKEY'])
-gm     = StockFighter::GameMaster.new(ENV['APIKEY'])
+client = StockKnight::Client.new(ENV['APIKEY'])
+gm     = StockKnight::GameMaster.new(ENV['APIKEY'])
 
 stock = nil
 instance_id = nil

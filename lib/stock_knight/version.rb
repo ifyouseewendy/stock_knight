@@ -1,3 +1,3 @@
-module StockFighter
+module StockKnight
   VERSION = "0.2.0"
 end

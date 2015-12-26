@@ -2,9 +2,9 @@ require 'httparty'
 require 'active_support/core_ext/hash/indifferent_access'
 require 'json'
 
-require "stock_fighter/version"
-require "stock_fighter/client"
-require "stock_fighter/game_master"
+require "stock_knight/version"
+require "stock_knight/client"
+require "stock_knight/game_master"
 
 begin
   require "pry"

@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'stock_fighter'
+require 'stock_knight'
 
 require 'minitest/autorun'
 

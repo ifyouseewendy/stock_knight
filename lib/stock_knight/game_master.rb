@@ -1,4 +1,4 @@
-module StockFighter
+module StockKnight
   class GameMaster
     include HTTParty
     base_uri 'https://www.stockfighter.io/gm'

@@ -1,11 +1,11 @@
 require 'thor'
-require_relative 'lib/stock_fighter'
+require_relative 'lib/stock_knight'
 
 class GameCommander < Thor
   desc 'start', ''
   option :level, required: true
   def start
-    gm = StockFighter::GameMaster.new(ENV['APIKEY'])
+    gm = StockKnight::GameMaster.new(ENV['APIKEY'])
     resp = nil
 
     5.times do
@@ -33,14 +33,14 @@ class GameCommander < Thor
   desc 'stop', ''
   option :instance_id, required: true
   def stop
-    gm = StockFighter::GameMaster.new(ENV['APIKEY'])
+    gm = StockKnight::GameMaster.new(ENV['APIKEY'])
     puts gm.stop(options[:instance_id])
   end
 
   desc 'restart', ''
   option :instance_id, required: true
   def restart
-    gm = StockFighter::GameMaster.new(ENV['APIKEY'])
+    gm = StockKnight::GameMaster.new(ENV['APIKEY'])
     puts gm.restart(options[:instance_id])
   end
 end

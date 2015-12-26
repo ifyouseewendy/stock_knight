@@ -5,7 +5,7 @@ class GameMasterTest < Minitest::Test
 
   def setup
     @level = :first_steps
-    @gm = StockFighter::GameMaster.new(ENV['APIKEY'])
+    @gm = StockKnight::GameMaster.new(ENV['APIKEY'])
   end
 
   def test_start
