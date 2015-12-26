@@ -1,7 +1,5 @@
 module StockFighter
   class Client
-    attr_reader :config
-
     include HTTParty
     base_uri 'https://api.stockfighter.io/ob/api'
 
@@ -13,17 +11,28 @@ module StockFighter
 
     parser Parser::Simple
 
-    CONFIG = Struct.new(:apikey, :account, :venue, :debug_output) do
+    # Level specific info
+    CONFIG = Struct.new(:account, :venue, :debug_output) do
       def validate!
-        key = %i(apikey account venue).detect{|k| self.public_send(k).nil? }
+        key = %i(account venue).detect{|k| self.public_send(k).nil? }
         raise ArgumentError, "#{key} should not be blank" unless key.nil?
       end
     end
 
     TYPES = [:limit, :market, :fill_or_kill, :immediate_or_cancel]
 
-    def initialize
-      yield (@config=CONFIG.new)
+    attr_reader :apikey
+
+    def initialize(apikey)
+      @apikey = apikey
+    end
+
+    def config
+      @config ||= CONFIG.new
+    end
+
+    def configure
+      yield config
 
       config.validate!
 
@@ -90,7 +99,7 @@ module StockFighter
     private
 
       def headers
-        @_headers ||= { headers: { "X-Stockfighter-Authorization" => config.apikey } }
+        @_headers ||= { headers: { "X-Stockfighter-Authorization" => apikey } }
       end
 
   end

@@ -8,8 +8,8 @@ class StockFighterTest < Minitest::Test
   STOCK   = 'FOOBAR'
 
   def setup
-    @client = StockFighter::Client.new do |config|
-      config.apikey   = ENV['APIKEY']
+    @client = StockFighter::Client.new(ENV['APIKEY'])
+    @client.configure do |config|
       config.account  = ACCOUNT
       config.venue    = VENUE
     end

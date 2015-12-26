@@ -13,12 +13,14 @@ $ gem install stock_fighter
 Initialization
 
 ```ruby
-client = StockFighter::Client.new do |config|
-  config.apikey       = ENV['APIKEY']
+client = StockFighter::Client.new(ENV['APIKEY'])
+
+client.configure do |config|
   config.account      = ENV['ACCOUNT']
   config.venue        = ENV['VENUE']
   config.debug_output = true #  Log request and response info
 end
+
 stock = 'FOOBAR'
 ```
 
