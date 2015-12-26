@@ -109,6 +109,31 @@ client.quote_of(stock)
 account.check_api_status
 ```
 
+### GM API
+
+> https://discuss.starfighters.io/t/the-gm-api-how-to-start-stop-restart-resume-trading-levels-automagically/143
+
+```ruby
+gm = StockFighter::GameMaster.new(ENV['APIKEY'])
+
+gm.start(:firts_steps)
+gm.stop(instance_id)
+gm.active?(instance_id)
+gm.resume(instance_id)
+gm.restart(instance_id)
+gm.levels
+```
+
+Or you can use thor to do level controlling on the command line.
+
+```
+Commands:
+  Thorfile help [COMMAND]                     # Describe available commands or one specific command
+  Thorfile restart --instance-id=INSTANCE_ID  #
+  Thorfile start --level=LEVEL                #
+  Thorfile stop --instance-id=INSTANCE_ID     #
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
