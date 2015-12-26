@@ -1,17 +1,18 @@
 require 'test_helper'
 
 class GameMasterTest < Minitest::Test
-  attr_reader :gm
+  attr_reader :gm, :level
 
   def setup
-    @gm = StockFighter::GameMaster.new(ENV['APIKEY'], :first_steps)
+    @level = :first_steps
+    @gm = StockFighter::GameMaster.new(ENV['APIKEY'])
   end
 
   def test_start
     resp = nil
 
     VCR.use_cassette("test_start") do
-      resp = gm.start
+      resp = gm.start(level)
 
       assert resp.has_key?(:ok)
       resp[:ok] ? assert_nil(resp[:error]) : refute_nil(resp[:error])
@@ -27,7 +28,7 @@ class GameMasterTest < Minitest::Test
     resp = nil
 
     VCR.use_cassette("test_start") do
-      resp = gm.start
+      resp = gm.start(level)
     end
 
     VCR.use_cassette("test_stop") do
@@ -47,7 +48,7 @@ class GameMasterTest < Minitest::Test
 
     resp = nil
     VCR.use_cassette("test_start") do
-      resp = gm.start
+      resp = gm.start(level)
     end
 
     VCR.use_cassette("test_active_instance_id") do
@@ -65,7 +66,7 @@ class GameMasterTest < Minitest::Test
     resp = nil
 
     VCR.use_cassette("test_start") do
-      resp = gm.start
+      resp = gm.start(level)
     end
 
     instance_id = resp[:instanceId]
@@ -85,7 +86,7 @@ class GameMasterTest < Minitest::Test
     resp = nil
 
     VCR.use_cassette("test_start") do
-      resp = gm.start
+      resp = gm.start(level)
     end
 
     instance_id = resp[:instanceId]

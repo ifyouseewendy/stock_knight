@@ -11,14 +11,13 @@ module StockFighter
 
     parser Parser::Simple
 
-    attr_reader :apikey, :level, :instance_id, :account, :venues, :tickers
+    attr_reader :apikey
 
-    def initialize(apikey, level)
+    def initialize(apikey)
       @apikey = apikey
-      @level  = level
     end
 
-    def start
+    def start(level)
       self.class.post("/levels/#{level}", headers)
     end
 
