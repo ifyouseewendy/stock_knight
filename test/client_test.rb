@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class StockFighterTest < Minitest::Test
+class ClientTest < Minitest::Test
   attr_reader :client, :stock
 
   ACCOUNT = 'EXB123456'
