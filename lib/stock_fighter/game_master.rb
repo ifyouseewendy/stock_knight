@@ -37,6 +37,10 @@ module StockFighter
       self.class.post("/instances/#{instance_id}/restart", headers)
     end
 
+    def levels
+      self.class.get("/levels", headers)
+    end
+
     private
 
       def headers

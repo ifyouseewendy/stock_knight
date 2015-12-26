@@ -98,4 +98,14 @@ class GameMasterTest < Minitest::Test
       refute_equal account, resp[:account]
     end
   end
+
+  def test_levels
+    skip # from GM server: "Not implemented yet (an oversight).  Expect it to be available soonish."
+
+    # VCR.use_cassette("test_levels") do
+    #   resp = gm.levels
+    #   assert resp.has_key?(:ok)
+    #   resp[:ok] ? assert_empty(resp[:error]) : refute_empty(resp[:error])
+    # end
+  end
 end
