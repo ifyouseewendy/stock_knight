@@ -90,7 +90,7 @@ The Orderbook For A Stock
 > https://starfighter.readme.io/docs/get-orderbook-for-stock
 
 ```ruby
-client.orderbook_of('FOOBAR')
+client.orderbook_of(stock)
 ```
 
 A Quote For A Stock
